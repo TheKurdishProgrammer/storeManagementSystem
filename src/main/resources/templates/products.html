@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <script th:src="@{/main.js}" type="text/javascript">
+
+    </script>
+
+
+</head>
+<body>
+
+<div th:replace="fragments/top-navbar :: navbar"></div>
+
+<h2>Registered Products</h2>
+
+
+<button class="btn btn-primary" data-target="#addProductModal" data-toggle="modal" id="addProductBt"
+        style="margin: 8px">Add Produtt
+</button>
+
+
+<table class="table table-stripped">
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Qty</td>
+        <td>Price</td>
+        <td>Code</td>
+        <td>Edit</td>
+        <td>Delete</td>
+
+    </tr>
+    </thead>
+    <tr th:each="product:${products}">
+        <td th:text="${product.id} ">Id</td>
+        <td th:text="${product.name}">Name</td>
+        <td th:text="${product.quantity}">Quantity</td>
+        <td th:text="${product.price + '$'}">Price</td>
+        <td th:text="${product.code}">Code</td>
+        <!--        <td><a  th:href="@{/products/editProduct/(id=${product.id})}" class="btn btn-warning text-white">Edit</a></td>-->
+        <td><a class="editProductBt btn btn-warning text-white" th:href="@{/products/getProduct/(id=${product.id})}">Edit</a>
+        </td>
+        <td><a class="btn btn-danger text-white" th:href="@{/products/deleteProduct/(id=${product.id})}">Delete</a></td>
+    </tr>
+</table>
+
+
+<div aria-hidden="true" aria-labelledby="addProductModal" class="modal fade" id="addProductModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel">New Product</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" th:action="@{/products/addProduct}">
+
+
+                    <input id="product-id" name="id" type="hidden" value="0">
+
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="product-name">Product Name:</label>
+                        <input autofocus class="form-control" id="product-name" name="name"
+                               placeholder="Enter Product name" required type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="product-code">Product Code:</label>
+                        <input class="form-control" id="product-code" name="code" placeholder="Enter Product code"
+                               required type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="product-quantity">Product Quantity:</label>
+                        <input class="form-control" id="product-quantity" name="quantity"
+                               placeholder="Enter Product quantity" required type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="product-price">Product Price:</label>
+                        <input class="form-control" id="product-price" name="price" placeholder="Enter Product price"
+                               required style="display: inline" type="text">
+                        <label style="display: inline">$</label>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Save Products</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+</script>
+
+</body>
+</html>
