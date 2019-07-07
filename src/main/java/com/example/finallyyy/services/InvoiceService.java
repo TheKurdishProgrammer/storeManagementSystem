@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -102,8 +103,14 @@ public class InvoiceService {
         LocalDate localDate = LocalDate.now();
 
         Date dat = new Date();
-        dat.setTime(localDate.toEpochDay() + localDate.toEpochDay());
-        invoice.setCreatedDate(dat);
+
+        Date d1 = new Date();
+
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/YYYY HH:mm a");
+        String formattedDate = df.format(d1);
+
+        dat.setTime(dateFormat.getCalendar().getTimeInMillis() + localDate.toEpochDay());
+        invoice.setCreatedDate(new Date());
 
         invoiceRepository.save(invoice);
     }

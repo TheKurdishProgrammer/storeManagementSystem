@@ -62,7 +62,7 @@ public class OrderController {
 
 
     @PostMapping(value = {"/addOrder", "/addOrder/"})
-    public String addSupplier(HttpServletRequest request) {
+    public String addOrder(HttpServletRequest request) {
 
 
         Invoice invoice = new Invoice();

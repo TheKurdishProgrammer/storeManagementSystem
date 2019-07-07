@@ -30,14 +30,12 @@
         <td>Id</td>
         <td>Supplier</td>
         <td>Date</td>
-        <td>Total Cost</td>
         <td>Print</td>
 
     </tr>
     </thead>
     <tr th:each="order:${orders}">
         <td th:text="${order.id} ">Id</td>
-        <td th:text="${order.supplier.name}">Name</td>
         <td th:text="${order.supplier.name}">Name</td>
         <td th:text="${order.createdDate}">Name</td>
 
